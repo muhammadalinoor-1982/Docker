@@ -1,0 +1,61 @@
+Step#1 Goto Bios and enable virtualization
+Step#2 Goto Turn Windows Features on window and checkbox of hiper-v and windows subsystem for linux
+Step#3 Goto Microsoft app store and install Ubuntu
+Step#4 Install Docker-Desktop and Integrate wsl Ubuntu in the Settings>>General and Resource portion 
+Step#5 Install VScode and add extention of wsl, docker and python
+Step#6 Create Flask API and requirements.txt
+	Note: Create requirements.txt: 
+	Command: pip freeze >requirements.txt
+Step#7 Create a Dockerfile:
+	Note: In The Dockerfile:
+	# Use an official Python runtime as a parent image
+	FROM python:3.11.9
+
+	# Set the working directory in the container
+	WORKDIR /abc
+
+	# Copy the current directory contents into the container at /app
+	COPY . /abc
+
+	# Install any needed packages specified in requirements.txt
+	RUN pip install --no-cache-dir -r requirements.txt
+
+	# Make port 80 available to the world outside this container
+	EXPOSE 80
+
+	# Define environment variable
+	ENV NAME World
+
+	# Run app.py when the container launches
+	CMD ["python", "abc.py"]
+
+Step#8 Goto wsl Terminal To Build a Docker Image:
+	Note: If Need to Upgrade pip then run the command: sudo apt install python3-pip
+	Command: ubuntuuser$ docker build -t abc .
+	Note: Source Link: https://www.youtube.com/watch?v=0eMU23VyzR8
+Step#9 Build Docker Container:
+	Command: ubuntuuser$ docker run -p 4000:80 abc
+Step#10 Check the docker container status:
+	Command: ubuntuuser$ docker ps
+Step#11 Goto Browser and enter the url: localhost:3000
+Step#12 To Stop Container: 
+	Note: Container ID: 411bfdb13f93
+	Command: ubuntuuser$ docker stop 411bfdb13f93
+	Command: ubuntuuser$ docker start 411bfdb13f93
+Step#13 Check The Log of Container:
+	Command Command: ubuntuuser$ docker logs 411bfdb13f93 Note: Container ID or Name
+	Command Command: ubuntuuser$ docker logs -f 411bfdb13f93 Note: Print Continuous Log
+	Command Command: ubuntuuser$ docker logs -f --tail 10 411bfdb13f93 Note: Print Last 10 line of Log
+Step#14 Goto hub.docker.com and login as docker user then find the pushed container for anyone use
+Step#15 Save Docker Image in a Local Machine:
+	Note: Source Link: https://www.youtube.com/watch?v=RwaqOJL20m8
+	Command: C:\Users\me>docker save --output="Desktop\aaa.tar" wow Note: aaa.tar is a new tar file and ‘wow’ is a image name
+Step#16 Load Docker Image:
+	Command: C:\Users\me>docker load --input="Desktop\aaa.tar"
+Step#17 Remove Docker Image: 
+	Command: ubuntuuser$ docker rmi 5bf6a2e3bc31
+	Command: ubuntuuser$ docker rmi -f 5bf6a2e3bc31 Note: Forcely Remove Single or Multiple Image
+Step#18 Push The Docker Container in The Docker Hub:
+	Command: ubuntuuser$ docker push abc
+
+
